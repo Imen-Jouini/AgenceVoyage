@@ -14,8 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories=Category::orderBy('id')->paginate(10);
+
+       return view('Categorie.indexCategorie',compact('categories')); 
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+       // $categorie=new categorie;
+        return view ('Categorie/Create');
     }
 
     /**
@@ -35,8 +39,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+    
+    $categorie = Category::create(['category'=>$request->category]);
+    
+     return redirect()->route('categorie.show', $categorie)->with('successNewcategorie', 'categorie ajouté avec succés');
     }
+
+
+
+
+      
 
     /**
      * Display the specified resource.

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Local;
 use Illuminate\Http\Request;
+use App\Category;
+use App\Place;
 
 class LocalController extends Controller
 {
@@ -14,7 +16,9 @@ class LocalController extends Controller
      */
     public function index()
     {
-        //
+        $local=Local::orderBy('id')->get();
+
+       return view('Local.indexLocal',compact('local')); 
     }
 
     /**
@@ -24,7 +28,10 @@ class LocalController extends Controller
      */
     public function create()
     {
-        //
+        $categorie=Category::all();
+        $place = Place::all();
+        return view('Local.createLocal',compact('categorie','place'));
+
     }
 
     /**
@@ -33,9 +40,22 @@ class LocalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+   
     public function store(Request $request)
     {
-        //
+        $local = Local::create([
+            'nbretoile'=>$request->nombreetoile,
+            'nom'=>$request->nom,
+            'capacite'=>$request->capacite,
+            'adresse'=>$request->adresse,
+            'description'=>$request->Description,
+            'category_id'=>$request->categorie,
+            'place_id'=>$request->place, 
+            'prix'=>$request->prix, 
+
+        ]);
+    
+     return redirect()->route('local.index');
     }
 
     /**

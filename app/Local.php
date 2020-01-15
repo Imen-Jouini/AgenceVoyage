@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Local extends Model
 {
+   protected $guarded=[];
    public function Place()
    {
    	return $this->hasMany('App\Place');
@@ -26,10 +27,7 @@ class Local extends Model
    {
    	return $this->belongsTo('App\Category');
    }
-    public function Place()
-   {
-   	return $this->belongsTo('App\Place');
-   }
+    
 
 
 

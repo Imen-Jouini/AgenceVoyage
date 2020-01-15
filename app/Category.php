@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-	public function Local
+	protected $guarded = [];
+	public function Local()
 	{
     return $this->hasMany('App\Local');
      }

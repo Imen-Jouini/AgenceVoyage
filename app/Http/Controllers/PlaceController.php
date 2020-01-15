@@ -14,7 +14,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        $places=Place::orderBy('id')->paginate(10);
+
+       return view('Place.indexPlace',compact('places')); 
     }
 
     /**
@@ -24,7 +26,9 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+
+
+        return view ('Place.createPlace');
     }
 
     /**
@@ -36,6 +40,22 @@ class PlaceController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->has('photo'))
+        {
+            $url = time().'-'.$request->photo->getClientOriginalName();
+            $destination = 'images';
+            $request->photo->move($destination,$url);
+        }
+        else
+        {
+            $url='no-photo.jpg';
+        }
+        $place = Place::create([
+            'place'=>$request->place,
+            'photo'=>$url,
+        ]);
+
+         return redirect()->route('place.index');
     }
 
     /**
