@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use Illuminate\Http\Request;
-
+use App\Local;
 class PhotoController extends Controller
 {
     /**
@@ -14,7 +14,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $photo=Photo::orderBy('id');
+
+       return view('Photo.indexPhoto',compact('photo')); 
     }
 
     /**

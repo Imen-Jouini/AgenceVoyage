@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Photo extends Model
 {
 	   protected $guarded=[];
-	public function Local
+	public function Local()
 	{
    return $his->belongsTo('App\Local');
     }

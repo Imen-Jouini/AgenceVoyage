@@ -19,3 +19,4 @@ Route::get('/', function () {
 Route::resource('categorie','CategoryController');
 Route::resource('place','PlaceController');
 Route::resource('local','LocalController');
+Route::resource('photo','PhotoController');

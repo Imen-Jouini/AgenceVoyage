@@ -8,8 +8,10 @@
                 <ul class="list-group">
                   
                    @foreach ($places as $place)
-                   <li class="list-group-item"><a href="Place/{{$place->id}}"> <p>
+                   <li class="list-group-item"><a href="{{route('place.show',$place->id)}}"> <p>
+
                     {{$place->place}}</p></a></li>
+                    <li><a href="{{route('place.edit',$place->id)}}" class="btn btn-info">Edit place</a> </li>
                   
                      @endforeach
                      <div class="py-3">

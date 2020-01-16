@@ -77,7 +77,10 @@ class LocalController extends Controller
      */
     public function edit(Local $local)
     {
-        //
+        $categorie=Category::all();
+
+        $place=Place::all();
+        return view('Local/editLocal',compact('categorie','place','local'));
     }
 
     /**
@@ -89,7 +92,18 @@ class LocalController extends Controller
      */
     public function update(Request $request, Local $local)
     {
-        //
+       
+        $local->update([
+            'nbretoile'=>$request->nbretoile,
+            'nom'=>$request->nom,
+            'capacite'=>$request->capacite,
+            'adresse'=>$request->adresse,
+            'description'=>$request->description,
+            'category_id'=>$request->categorie,
+            'place_id'=>$request->place, 
+            'prix'=>$request->prix]);
+
+           return redirect()->route('local.index')->with('successNewClient', 'client modifié avec succés');
     }
 
     /**
