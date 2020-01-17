@@ -6,6 +6,7 @@ use App\Local;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Place;
+use App\Photo;
 
 class LocalController extends Controller
 {
@@ -51,9 +52,25 @@ class LocalController extends Controller
             'description'=>$request->Description,
             'category_id'=>$request->categorie,
             'place_id'=>$request->place, 
-            'prix'=>$request->prix, 
-
+            'prix'=>$request->prix,
+            
         ]);
+
+    if($request->hasfile('photo'))
+        {
+            foreach($request->photo as $photo)
+            {
+            $url = time().'-'.$photo->getClientOriginalName();
+            $destination = 'images';
+            $photo->move($destination,$url);
+            $image=Photo::create(['photo'=>$url,'local_id'=>$local->id
+            ]);
+            }
+        }
+        
+       
+
+      
     
      return redirect()->route('local.index');
     }

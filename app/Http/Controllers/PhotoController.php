@@ -14,7 +14,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $photo=Photo::orderBy('id');
+        $photo=Photo::all();
 
        return view('Photo.indexPhoto',compact('photo')); 
     }
@@ -26,7 +26,8 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        $local=Local::all();
+       return view('Photo.createPhoto',compact('local'));  
     }
 
     /**
@@ -37,7 +38,21 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       if($request->hasfile('photo'))
+         {
+
+       foreach($request->file('photo') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images/', $name);  
+                $data[] = $name;  
+                $photo = Photo::create(['photo'=>$name,'local_id'=>$request->local]);
+            }
+         
+       return redirect()->route('photo.index')->with('success', 'Your images has been successfully');
+
+      }
+
     }
 
     /**
@@ -48,7 +63,7 @@ class PhotoController extends Controller
      */
     public function show(Photo $photo)
     {
-        //
+        return view('Photo/showPhoto')->with('photo',$photo);
     }
 
     /**

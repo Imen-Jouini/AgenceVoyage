@@ -9,7 +9,7 @@ class Local extends Model
    protected $guarded=[];
    public function Place()
    {
-   	return $this->hasMany('App\Place');
+   	return $this->belongsTo('App\Place');
    }
    public function Photo()
    {

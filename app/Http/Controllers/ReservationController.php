@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Resevation;
 use Illuminate\Http\Request;
 
-class ResevationController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class ResevationController extends Controller
      */
     public function show(Resevation $resevation)
     {
-        //
+       
     }
 
     /**

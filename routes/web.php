@@ -11,12 +11,21 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('index');
 });
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 
 Route::resource('categorie','CategoryController');
 Route::resource('place','PlaceController');
 Route::resource('local','LocalController');
 Route::resource('photo','PhotoController');
+Route::resource('reservation','ReservationController');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
